@@ -64,7 +64,7 @@ public partial class TrainingGroup
         var поПолу = ФильтроватьПоПолу(пол);
         
         Predicate<Athlete> фильтрВозраста = а => а.Age >= минВозраст && а.Age <= максВозраст;
-        return poПолу.FindAll(фильтрВозраста);
+        return поПолу.FindAll(фильтрВозраста);
     }
 
     /// <summary>
