@@ -5,7 +5,7 @@
         Loaded="MainWindow_Loaded">
     <Grid>
         <TabControl Margin="10">
-            <!-- Вкладка 1: Управление группами -->
+            <!-- Вкладка 1: Группы -->
             <TabItem Header="Группы и спортсмены">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
@@ -15,49 +15,51 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                        <ComboBox x:Name="cbGroups" Width="300" DisplayMemberPath="НазваниеГруппы" 
-                                  SelectionChanged="cbGroups_SelectionChanged"/>
-                        <Button Content="Обновить" Margin="10,0" Click="btnRefresh_Click"/>
+                        <ComboBox x:Name="cbGroups" Width="350" DisplayMemberPath="НазваниеГруппы" 
+                                  SelectionChanged="cbGroups_SelectionChanged" Margin="0,0,10,0"/>
+                        <Button Content="Обновить" Click="btnRefresh_Click"/>
                     </StackPanel>
 
-                    <DataGrid x:Name="dgvAthletes" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid x:Name="dgvAthletes" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,10">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ФИО" Binding="{Binding GetFullName}"/>
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding GetFullName, Mode=OneWay}"/>
                             <DataGridTextColumn Header="Возраст" Binding="{Binding Age}"/>
                             <DataGridTextColumn Header="Пол" Binding="{Binding Gender}"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <!-- Панель добавления -->
-                    <GroupBox Header="Добавить спортсмена" Grid.Row="2" Margin="0,10,0,0">
+                    <GroupBox Header="Добавить спортсмена" Grid.Row="2">
                         <StackPanel Orientation="Horizontal" Margin="10">
-                            <TextBox x:Name="txtFirstName" Width="150" Margin="5" Hint="Имя"/>
-                            <TextBox x:Name="txtLastName" Width="150" Margin="5" Hint="Фамилия"/>
-                            <TextBox x:Name="txtPatronymic" Width="150" Margin="5" Hint="Отчество"/>
-                            <TextBox x:Name="txtAge" Width="80" Margin="5" Hint="Возраст"/>
-                            <ComboBox x:Name="cbGender" Width="80" Margin="5">
-                                <ComboBoxItem>M</ComboBoxItem>
-                                <ComboBoxItem>F</ComboBoxItem>
+                            <TextBox x:Name="txtFirstName" Width="140" Margin="5" ToolTip="Имя"/>
+                            <TextBox x:Name="txtLastName" Width="140" Margin="5" ToolTip="Фамилия"/>
+                            <TextBox x:Name="txtPatronymic" Width="140" Margin="5" ToolTip="Отчество"/>
+                            <TextBox x:Name="txtAge" Width="70" Margin="5" ToolTip="Возраст"/>
+                            <ComboBox x:Name="cbGender" Width="70" Margin="5">
+                                <ComboBoxItem Content="M"/>
+                                <ComboBoxItem Content="F"/>
                             </ComboBox>
                             <Button Content="Добавить" Click="btnAddAthlete_Click" Margin="10,0"/>
-                            <Button Content="Удалить выбранного" Click="btnRemoveAthlete_Click" Margin="5,0"/>
+                            <Button Content="Удалить" Click="btnRemoveAthlete_Click" Margin="5,0"/>
                         </StackPanel>
                     </GroupBox>
                 </Grid>
             </TabItem>
 
-            <!-- Вкладка 2: Статистика тренеров -->
+            <!-- Вкладка 2: Статистика -->
             <TabItem Header="Статистика тренеров">
-                <DataGrid x:Name="dgvTrainers" Margin="10" AutoGenerateColumns="False" IsReadOnly="True"/>
+                <DataGrid x:Name="dgvTrainers" Margin="10" AutoGenerateColumns="True" IsReadOnly="True"/>
             </TabItem>
 
             <!-- Вкладка 3: Фидбек -->
             <TabItem Header="Оставить отзыв">
-                <StackPanel Margin="20">
-                    <ComboBox x:Name="cbAthletesFeedback" Width="400" DisplayMemberPath="GetFullName" Margin="5"/>
-                    <ComboBox x:Name="cbGroupsFeedback" Width="400" DisplayMemberPath="НазваниеГруппы" Margin="5"/>
-                    <TextBox x:Name="txtRating" Width="150" Margin="5" Hint="Оценка (1-10)"/>
-                    <Button Content="Оставить фидбек" Width="200" Click="btnGiveFeedback_Click" Margin="10"/>
+                <StackPanel Margin="30" HorizontalAlignment="Left">
+                    <TextBlock Text="Спортсмен:" Margin="0,5"/>
+                    <ComboBox x:Name="cbAthletesFeedback" Width="400" DisplayMemberPath="GetFullName" Margin="0,0,0,10"/>
+                    <TextBlock Text="Группа:" Margin="0,5"/>
+                    <ComboBox x:Name="cbGroupsFeedback" Width="400" DisplayMemberPath="НазваниеГруппы" Margin="0,0,0,10"/>
+                    <TextBlock Text="Оценка (1-10):" Margin="0,5"/>
+                    <TextBox x:Name="txtRating" Width="150" Margin="0,0,0,10"/>
+                    <Button Content="Оставить фидбек" Width="200" Height="40" Click="btnGiveFeedback_Click"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
